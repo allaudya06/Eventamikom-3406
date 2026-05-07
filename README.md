@@ -10,7 +10,7 @@
   
   <br><br>
 
-  <a href="#">Lihat Demo Aplikasi</a>
+  <a href="https://eventamikom-3406-main-few3pg.free.laravel.cloud/">Lihat Demo Aplikasi</a>
 
 </div>
 
