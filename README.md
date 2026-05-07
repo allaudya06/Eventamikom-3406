@@ -18,10 +18,10 @@
 
 ### Identitas Mahasiswa
 
-* **Nama:** Wasima Juhaina
-* **NIM:** 24.12.3282
-* **Prodi:** Digital Business
-* **Repository:** amikomeventhub_3232
+* **Nama:** Allaudya Mutiara Annida
+* **NIM:** 24.12.3406
+* **Mata Kuliah:** Digital Business
+* **Repository:** Eventamikom-3406
 
 ---
 
@@ -29,15 +29,15 @@
 
 | Nama Tugas | Deskripsi / Bagian | Link Proyek |
 | :--- | :--- | :--- |
-| **TUGAS 1** | Project Initial | [Buka Proyek](#) |
-| | Halaman Katalog | [Lihat Katalog](#) |
-| | Halaman Bantuan | [Lihat Bantuan](#) |
-| | Halaman Profil | [Lihat Profil](#) |
-| | Halaman Kontak | [Lihat Kontak](#) |
-| **TUGAS 2** | Dashboard Admin | [Lihat Dashboard](#) |
-| | Manajemen Event | [Lihat Event](#) |
-| | Laporan Transaksi | [Lihat Transaksi](#) |
-| | Beranda / Welcome | [Lihat Beranda](#) |
-| | Detail Event | [Lihat Detail Event](#) |
-| | Checkout Tiket | [Lihat Checkout](#) |
-| | Kategori | [Lihat Kategori](#) |
+| **TUGAS 1** | Project Initial | [Buka Proyek](https://eventamikom-3406-main-few3pg.free.laravel.cloud/) |
+| | Halaman Katalog | [Lihat Katalog](https://eventamikom-3406-main-few3pg.free.laravel.cloud/katalog) |
+| | Halaman Bantuan | [Lihat Bantuan](https://eventamikom-3406-main-few3pg.free.laravel.cloud/bantuan) |
+| | Halaman Profil | [Lihat Profil](https://eventamikom-3406-main-few3pg.free.laravel.cloud/profil) |
+| | Halaman Kontak | [Lihat Kontak](https://eventamikom-3406-main-few3pg.free.laravel.cloud/kontak) |
+| **TUGAS 2** | Dashboard Admin | [Lihat Dashboard](https://eventamikom-3406-main-few3pg.free.laravel.cloud/admin/dashboard) |
+| | Manajemen Event | [Lihat Event](https://eventamikom-3406-main-few3pg.free.laravel.cloud/admin/events) |
+| | Laporan Transaksi | [Lihat Transaksi](https://eventamikom-3406-main-few3pg.free.laravel.cloud/admin/transactions) |
+| | Beranda / Welcome | [Lihat Beranda](https://eventamikom-3406-main-few3pg.free.laravel.cloud/) |
+| | Detail Event | [Lihat Detail Event](https://eventamikom-3406-main-few3pg.free.laravel.cloud/event-detail.html) |
+| | Checkout Tiket | [Lihat Checkout](https://eventamikom-3406-main-few3pg.free.laravel.cloud/checkout.html) |
+| | Kategori | [Lihat Kategori](https://eventamikom-3406-main-few3pg.free.laravel.cloud/admin/categories) |
