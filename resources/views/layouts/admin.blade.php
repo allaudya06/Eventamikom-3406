@@ -44,8 +44,8 @@
                 Dashboard
             </a>
             <a href="{{ route('admin.events.index') }}" class="flex items-center
-            gap-3 px-4 py-3 {{ request()->routeIs('admin.events.*') ? 'bg-indigo-800
-            text-white' : 'hover:bg-indigo-800' }} rounded-xl font-bold transition">
+             gap-3 px-4 py-3 {{ request()->routeIs('admin.events.*') ? 'bg-indigo-800
+             text-white' : 'hover:bg-indigo-800' }} rounded-xl font-bold transition">
                 <svg class="w-5 h-5 {{ request()->routeIs('admin.events.*') ?
                     'text-indigo-300' : 'text-indigo-400' }}" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
@@ -54,6 +54,17 @@
                         2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
                 Kelola Event
+            </a>
+            <a href="{{ route('admin.categories') }}" class="flex items-center
+             gap-3 px-4 py-3 {{ request()->routeIs('admin.categories.*') ? 'bg-indigo-800
+             text-white' : 'hover:bg-indigo-800' }} rounded-xl font-bold transition">
+                <svg class="w-5 h-5 {{ request()->routeIs('admin.categories.*') ?
+                    'text-indigo-300' : 'text-indigo-400' }}" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7.414a2 2 0 010 2.828l-7 7.414a2 2 0 01-2.828 0l-7-7.414A4.002 4.002 0 017 3z"></path>
+                </svg>
+                Kelola Kategori
             </a>
             <a href="{{ route('admin.transactions') }}" class="flex
             items-center gap-3 px-4 py-3 {{ request()->routeIs('admin.transactions.*') ?
@@ -71,19 +82,16 @@
             </a>
         </nav>
         <div class="pt-6 border-t border-indigo-800">
-            <form action="#" method="POST">
-                @csrf
-                <button type="submit" class="w-full flex items-center gap-3 px-4
-                py-3 text-indigo-300 hover:text-white transition font-medium text-left">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0
-                            01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
-                    Keluar
-                </button>
-            </form>
+            <a href="{{ url('/') }}" class="w-full flex items-center gap-3 px-4
+            py-3 text-indigo-300 hover:text-white transition font-medium text-left">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0
+                        01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+                Keluar
+            </a>
         </div>
     </aside>
     <!-- Main Content -->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -23,7 +24,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        $categories = \App\Models\Category::all();
+        $categories = \App\Models\Category::orderBy('name')->get();
         return view('admin.events.create', compact('categories'));
 
     }
@@ -33,7 +34,6 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        // Menerapkan validasi data request dari pengguna
         $data = $request->validate([
             'category_id' => 'required',
             'title' => 'required|string|max:255',
@@ -41,13 +41,16 @@ class EventController extends Controller
             'date' => 'required|date',
             'location' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'stock' => 'required|numeric'
+            'stock' => 'required|numeric',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Menyimpan data yang telah divalidasi ke dalam tabel menggunakan Model
+        if ($request->hasFile('poster')) {
+            $data['poster_path'] = $request->file('poster')->store('posters', 'public');
+        }
+
         \App\Models\Event::create($data);
-            return redirect()->route('admin.events.index')->with('success', 'Data Event
-        berhasil ditambahkan.');
+        return redirect()->route('admin.events.index')->with('success', 'Data Event berhasil ditambahkan.');
     }
 
     /**
@@ -63,7 +66,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        $categories = \App\Models\Category::all();
+        $categories = \App\Models\Category::orderBy('name')->get();
         return view('admin.events.edit', compact('event', 'categories'));
     }
 
@@ -79,12 +82,19 @@ class EventController extends Controller
             'date' => 'required|date',
             'location' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'stock' => 'required|numeric'
+            'stock' => 'required|numeric',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-        $event->update($data);
-        return redirect()->route('admin.events.index')->with('success', 'Rincian
-        data event berhasil diperbarui.');
 
+        if ($request->hasFile('poster')) {
+            if ($event->poster_path) {
+                Storage::disk('public')->delete($event->poster_path);
+            }
+            $data['poster_path'] = $request->file('poster')->store('posters', 'public');
+        }
+
+        $event->update($data);
+        return redirect()->route('admin.events.index')->with('success', 'Rincian data event berhasil diperbarui.');
     }
 
     /**
@@ -92,9 +102,10 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        if ($event->poster_path) {
+            Storage::disk('public')->delete($event->poster_path);
+        }
         $event->delete();
-            return redirect()->route('admin.events.index')->with('success', 'Data event
-        berhasil dihapus secara permanen.');
-
+        return redirect()->route('admin.events.index')->with('success', 'Data event berhasil dihapus secara permanen.');
     }
 }

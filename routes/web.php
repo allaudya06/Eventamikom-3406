@@ -10,9 +10,7 @@ use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class,'index']);
 
 Route::get('/kontak', function () {
     return view('contact');
@@ -30,9 +28,7 @@ Route::get('/bantuan', function () {
     return view('bantuan');
 });
 
-Route::get('/app', [HomeController::class,'index']);
-
-Route::get('/event-detail', [PublicEventController::class, 'show']);
+Route::get('/event-detail/{id?}', [PublicEventController::class, 'show']);
 Route::get('/checkout', [PublicEventController::class, 'checkout']);
 Route::get('/ticket', [TicketController::class, 'show']);
 
@@ -41,4 +37,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('events', EventController::class);
     Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+    Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{category}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 });

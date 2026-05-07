@@ -6,7 +6,7 @@
 </head>
 <body class="bg-slate-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 max-w-md w-full text-center">
-        <h1 class="text-2xl font-bold text-slate-800 mb-2">Profil Praktikan</h1>
+        <h1 class="text-2xl font-bold text-slate-800 mb-2">Profil Praktikum Digital Bisnis</h1>
         <p class="text-slate-600 mb-1">Nama: Allaudya Mutiara Annida</p>
         <p class="text-slate-600 mb-1">NIM: 24.12.3406</p>
         <p class="text-slate-600 mb-6">Program Studi: S1 Sistem Informasi</p>

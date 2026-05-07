@@ -23,12 +23,15 @@ max-w-3xl">
             <select name="category_id" class="w-full px-5 py-4 bg-slate-50
             border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10
             focus:border-indigo-600 outline-none transition font-medium" required>
-                <option value="">Pilih Kategori</option>
+                <option value="">-- Pilih Kategori --</option>
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}" {{ old('category_id') ==
                 $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
             </select>
+            @if($categories->isEmpty())
+            <p class="text-xs text-slate-400 mt-1">Belum ada kategori. <a href="{{ route('admin.categories.create') }}" class="text-indigo-600 hover:underline">Tambah kategori</a></p>
+            @endif
             @error('category_id') <span class="text-red-500 text-sm mt-1">{{
             $message }}</span> @enderror
         </div>
