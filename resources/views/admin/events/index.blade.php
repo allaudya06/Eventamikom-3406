@@ -4,15 +4,31 @@
 @section('page_title', 'Kelola Event')
 @section('page_subtitle', 'Buat dan atur acara seru Anda di sini.')
 @section('content')
-<div class="mb-4 text-right">
+<div class="mb-6 flex justify-between items-center gap-4">
+    <!-- Search Form on Left -->
+    <form method="GET" action="{{ route('admin.events.index') }}" class="flex gap-2">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari event..."
+            class="px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition min-w-[300px]">
+        <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 active:scale-95 transition">
+            Cari
+        </button>
+        @if(request('search'))
+        <a href="{{ route('admin.events.index') }}" class="px-6 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold hover:bg-slate-300 active:scale-95 transition">
+            Reset
+        </a>
+        @endif
+    </form>
+
+    <!-- Tambah Event Button on Right -->
     <a href="{{ route('admin.events.create') }}" class="inline-block px-6 py-3
         bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-100
         hover:bg-indigo-700 active:scale-95 transition">
         + Tambah Event Baru
     </a>
 </div>
-<div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm
-overflow-hidden">
+
+<!-- Events Table -->
+<div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead class="bg-slate-50 text-slate-400 uppercase text-[10px]
@@ -28,8 +44,7 @@ overflow-hidden">
             <tbody class="divide-y border-t">
                 @forelse($events as $index => $event)
                 <tr class="hover:bg-slate-50/50 transition">
-                    <td class="px-8 py-6 font-bold text-slate-400">{{
-                    $events->firstItem() + $index }}</td>
+                    <td class="px-8 py-6 font-bold text-slate-400">{{ $events->firstItem() + $index }}</td>
                     <td class="px-8 py-6">
                         @if($event->poster_path)
                         <img src="{{ asset('storage/' . $event->poster_path) }}" class="w-16 h-20 rounded-xl object-cover shadow-sm">
@@ -38,10 +53,11 @@ overflow-hidden">
                         @endif
                     </td>
                     <td class="px-8 py-6">
-                        <p class="font-black text-slate-800">{{ $event->title
-                        }}</p>
-                        <p class="text-xs text-slate-400">{{
-                            $event->category->name ?? '-' }} • {{ $event->date }}</p>
+                        <p class="font-black text-slate-800">{{ $event->title }}</p>
+                        <p class="text-xs text-slate-400">{{ $event->category->name ?? '-' }} • {{ $event->date }}</p>
+                        @if($event->partner)
+                        <p class="text-xs text-indigo-500 mt-1">{{ $event->partner->name }}</p>
+                        @endif
                     </td>
                     <td class="px-8 py-6">
                         <p class="font-bold text-indigo-600">Rp {{

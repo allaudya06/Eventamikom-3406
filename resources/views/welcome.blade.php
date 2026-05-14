@@ -101,4 +101,40 @@
             @endforelse
         </div>
     </section>
+
+    @if($partners->count() > 0)
+    <section class="max-w-7xl mx-auto px-6 py-20 bg-slate-50">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold mb-2">Partner & Sponsor</h2>
+            <p class="text-slate-500 font-medium">Berkolaborasi dengan mitra terpercaya kami</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @foreach($partners as $partner)
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex flex-col items-center justify-center gap-3 hover:shadow-lg transition relative
+                @if($partner->name === 'AmikomEventHub') ring-2 ring-indigo-500 bg-indigo-50 @endif">
+                @if($partner->logo_path)
+                <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}"
+                    class="max-h-16 object-contain">
+                @else
+                <span class="text-slate-400 font-bold text-lg">{{ $partner->name }}</span>
+                @endif
+                <div class="text-center">
+                    <p class="font-bold text-slate-800 text-sm">{{ $partner->name }}</p>
+                    @if($partner->type)
+                    <span class="inline-block mt-1 px-2 py-0.5 rounded text-xs font-bold {{ $partner->type === 'Technology Partner' ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-100 text-slate-600' }}">
+                        {{ $partner->type }}
+                    </span>
+                    @endif
+                </div>
+                @if($partner->name === 'AmikomEventHub')
+                <div class="absolute -top-2 -right-2 bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-full shadow-lg">
+                    PLATFORM
+                </div>
+                @endif
+            </div>
+            @endforeach
+        </div>
+    </section>
+    @endif
 @endsection

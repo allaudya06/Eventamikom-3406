@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Category;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,10 +14,23 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Memakai relasi dan pengaturan limit paginasi (10 entri per halaman)
-        $events = \App\Models\Event::with('category')->latest()->paginate(10);
+        $query = \App\Models\Event::with(['category', 'partner']);
+
+        // Search by title, location, or description
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('location', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        $events = $query->latest()->paginate(10);
+        $events->appends($request->except('page'));
+
         return view('admin.events.index', compact('events'));
     }
 
@@ -25,8 +40,8 @@ class EventController extends Controller
     public function create()
     {
         $categories = \App\Models\Category::orderBy('name')->get();
-        return view('admin.events.create', compact('categories'));
-
+        $partners = \App\Models\Partner::orderBy('name')->get();
+        return view('admin.events.create', compact('categories', 'partners'));
     }
 
     /**
@@ -36,6 +51,7 @@ class EventController extends Controller
     {
         $data = $request->validate([
             'category_id' => 'required',
+            'partner_id' => 'nullable|exists:partners,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
@@ -67,7 +83,8 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         $categories = \App\Models\Category::orderBy('name')->get();
-        return view('admin.events.edit', compact('event', 'categories'));
+        $partners = \App\Models\Partner::orderBy('name')->get();
+        return view('admin.events.edit', compact('event', 'categories', 'partners'));
     }
 
     /**
@@ -77,6 +94,7 @@ class EventController extends Controller
     {
         $data = $request->validate([
             'category_id' => 'required',
+            'partner_id' => 'nullable|exists:partners,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',

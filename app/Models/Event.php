@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     protected $fillable = [
-        'category_id', 'title', 'description', 'date',
+        'category_id', 'partner_id', 'title', 'description', 'date',
         'location', 'price', 'stock', 'poster_path'
     ];
 
@@ -21,4 +21,9 @@ class Event extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // Event dapat memiliki satu Partner (opsional)
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
 }

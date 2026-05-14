@@ -35,9 +35,26 @@ tracking-wide">Kategori</label>
             @if($categories->isEmpty())
             <p class="text-xs text-slate-400 mt-1">Belum ada kategori. <a href="{{ route('admin.categories.create') }}" class="text-indigo-600 hover:underline">Tambah kategori</a></p>
             @endif
-            @error('category_id') <span class="text-red-500 text-sm mt-1">{{
-$message }}</span> @enderror
+            @error('category_id') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
         </div>
+
+        <!-- Partner -->
+        <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Partner (Opsional)</label>
+            <select name="partner_id" class="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition font-medium">
+                <option value="">-- Tidak Ada Partner --</option>
+                @foreach($partners as $partner)
+                <option value="{{ $partner->id }}" {{ old('partner_id', $event->partner_id) == $partner->id ? 'selected' : '' }}>
+                    {{ $partner->name }} @if($partner->type) ({{ $partner->type }}) @endif
+                </option>
+                @endforeach
+            </select>
+            @if($partners->isEmpty())
+            <p class="text-xs text-slate-400 mt-1">Belum ada partner. <a href="{{ route('admin.partners.create') }}" class="text-indigo-600 hover:underline">Tambah partner</a></p>
+            @endif
+            @error('partner_id') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+        </div>
+
         <div>
             <label class="block text-sm font-bold text-slate-700 mb-2 uppercase
 tracking-wide">Deskripsi</label>
